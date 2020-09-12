@@ -1,0 +1,293 @@
+﻿@model ToKhaiYTeViewModel
+@inject ToKhaiYTeContext context
+
+@{
+    var GateList = context.Gates.ToList();
+    var YearList = context.Years.ToList();
+    var MonthList = context.Months.ToList();
+    var DayList = context.Days.ToList();
+    var ProvinceList = context.Province.ToList();
+    var DistrictList = context.District.ToList();
+    var WardList = context.Ward.ToList();
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Hệ thống thông tin quản lý Khai báo Y tế</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <div class="text-center">
+        <h4><strong> TỜ KHAI Y TẾ ĐỐI VỚI NGƯỜI NHẬP CẢNH</strong></h4>
+        <h5 class="mt-5"><strong> ĐÂY LÀ TÀI LIỆU QUAN TRỌNG, THÔNG TIN CỦA ANH/CHỊ SẼ GIÚP CƠ QUAN Y TẾ LIÊN LẠC KHI CẦN THIẾT ĐỂ PHÒNG CHỐNG DỊCH BỆNH TRUYỀN NHIỄM</strong></h5>
+        <h5 class="mt-4" style="color: red">Khuyến cáo: Khai báo thông tin sai là vi phạm pháp luật Việt Nam và có thể xử lý hình sự</h5>
+    </div>
+
+    <form class="form-group" asp-controller="ToKhaiYTe" asp-action="Register">
+        <div class="form-group">
+            <label class="control-label col-sm-2" asp-for="GatesId">Cửa Khẩu</label>
+            <div class="col-sm-10">
+                @Html.DropDownListFor(h => h.GatesId, new SelectList(GateList, "Id", "GateName"), "--Chọn--")
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="HoTen">Họ Tên(ghi chữ IN HOA)</label>
+            <input type="text" class="form-control" asp-for="HoVaTen">
+        </div>
+        <div class="form-group">
+            <label>Giới tính</label>
+            <input type="text" class="form-control" asp-for="GioiTinh">
+        </div>
+        <div class="form-group">
+            <label>Số hộ chiếu</label>
+            <input type="text" class="form-control" asp-for="SoHoChieu">
+        </div>
+        <div class="form-group">
+            <label asp-for="YearId">Năm sinh</label>
+            @Html.DropDownListFor(h => h.YearId, new SelectList(YearList, "Id", "Year"));
+        </div>
+        <div class="form-group">
+            <label>Tàu Bay</label>
+            <input type="checkbox" asp-for="ThongTinDiChuyen.TauBay" />
+        </div>
+        <div class="form-group">
+            <label>Tàu Thuyền</label>
+            <input type="checkbox" asp-for="ThongTinDiChuyen.TauThuyen" />
+        </div>
+        <div class="form-group">
+            <label>Ô tô</label>
+            <input type="checkbox" asp-for="ThongTinDiChuyen.Oto" />
+        </div>
+        <div class="form-group">
+            <label>Khác(Ghi rõ)</label>
+            <input type="text" asp-for="ThongTinDiChuyen.Khac" />
+        </div>
+        <div class="form-group">
+            <label>Số hiệu phương tiện</label>
+            <input type="text" asp-for="ThongTinDiChuyen.SoHieuPhuongTien" />
+        </div>
+        <div class="form-group">
+            <label>Số ghế</label>
+            <input type="text" asp-for="ThongTinDiChuyen.SoGhe" />
+        </div>
+        <div class="form-group">
+            <label>Ngày khởi hành</label>
+            @Html.DropDownListFor(h => h.ThongTinDiChuyen.DayId, new SelectList(DayList, "Id", "Day"))
+            @Html.DropDownListFor(h => h.ThongTinDiChuyen.MonthId, new SelectList(MonthList, "Id", "Month"))
+            @Html.DropDownListFor(h => h.ThongTinDiChuyen.YearId, new SelectList(YearList, "Id", "Year"))
+
+        </div>
+        <div class="form-group">
+            <label>Ngày nhập cảnh</label>
+            @Html.DropDownListFor(h => h.ThongTinDiChuyen.DayId, new SelectList(DayList, "Id", "Day"))
+            @Html.DropDownListFor(h => h.ThongTinDiChuyen.MonthId, new SelectList(MonthList, "Id", "Month"))
+            @Html.DropDownListFor(h => h.ThongTinDiChuyen.YearId, new SelectList(YearList, "Id", "Year"))
+        </div>
+        <div class="form-group">
+            <label>
+                Địa điểm khởi hành (tỉnh/quốc gia)
+                Quốc gia/ Vùng lãnh thổ (*)  : Việt Nam
+            </label>
+        </div>
+        <div>
+            <label>Tỉnh</label>
+            @Html.DropDownListFor(p => p.ThongTinLienLac.ProvinceId, new SelectList(ProvinceList, "Id", "Name"))
+        </div>
+
+
+        <div class="form-group">
+            <label>
+                Địa điểm nơi đến (tỉnh/quốc gia)
+                Quốc gia/ Vùng lãnh thổ (*) : Việt Nam
+            </label>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div form-group inline-block form-inline label-width>
+                    <label>Tỉnh <em style="color:red">(*)</em></label>
+                    @Html.DropDownListFor(p => p.ThongTinLienLac.ProvinceId, new SelectList(ProvinceList, "Id", "Name", "--Chon--"))
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Trong vòng 21 ngày qua, Anh/Chị có đến quốc gia/vùng lãnh thổ nào? (*)</label>
+            <input class="form-control" type="text" asp-for="ThongTinDiChuyen.TrongVong21Ngay" />
+        </div>
+
+        <h4><strong>Địa chỉ liên lạc tại Việt Nam</strong></h4>
+
+        <div class="row">
+            <div class="col">
+                <div form-group inline-block form-inline label-width>
+                    <label>Tỉnh thành<em style="color:red">(*)</em></label>
+                    @Html.DropDownListFor(h => h.ThongTinLienLac.ProvinceId,
+                    new SelectList(ProvinceList, "Id", "Name", "15"),
+                    new { @id = "Province", @class = "form-control" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div form-group inline-block form-inline label-width>
+                    <label>Quận Huyện<em style="color:red">(*)</em></label>
+                    @Html.DropDownListFor(h => h.ThongTinLienLac.DistrictId,
+                    new SelectList(DistrictList, "Id", "Name", "15"),
+                    new { @id = "District", @class = "form-control" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div form-group inline-block form-inline label-width>
+                    <label>Phường Xã <em style="color:red">(*)</em></label>
+                    @Html.DropDownListFor(h => h.ThongTinLienLac.WardId,
+                    new SelectList(WardList, "Id", "Name", "15"),
+                    new { @id = "Ward", @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div form-group inline-block form-inline label-width>
+                    <label>Địa Chỉ<em style="color:red">(*)</em></label>
+                    <input class="form-control" type="text" asp-for="ThongTinLienLac.HouseNum" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div form-group inline-block form-inline label-width>
+                    <label>Điện thoại<em style="color:red">(*)</em></label>
+                    <input class="form-control" type="number" asp-for="ThongTinLienLac.PhoneNum" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div form-group inline-block form-inline label-width>
+                    <label>Email<em style="color:red">(*)</em></label>
+                    <input class="form-control" type="email" asp-for="ThongTinLienLac.Email" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table table-bordered" style="width:50%">
+                <thead>
+                    <tr>
+                        <th>Triệu chứng</th>
+                        <th width="70" class="text-center">Có</th>
+                        <th width="70" class="text-center">Không</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Sốt <span class="text-required">(*)</span></td>
+                        <td class="text-center">@Html.RadioButtonFor(m => m.DauHieu.Sot, true)</td>
+                        <td class="text-center">@Html.RadioButtonFor(m => m.DauHieu.Sot, false)</td>
+                    </tr>
+                    <tr>
+                        <td>Ho <span class="text-required">(*)</span></td>
+                        <td class="text-center">@Html.RadioButtonFor(m => m.DauHieu.Ho, true)</td>
+                        <td class="text-center">@Html.RadioButtonFor(m => m.DauHieu.Ho, false)</td>
+                    <tr>
+
+                    <tr>
+                        <td>Khó thở <span class="text-required">(*)</span></td>
+                        <td class="text-center">@Html.RadioButtonFor(m => m.DauHieu.KhoTho, true)</td>
+                        <td class="text-center">@Html.RadioButtonFor(m => m.DauHieu.KhoTho, false)</td>
+                    <tr>
+                    <tr>
+                        <td>Đau họng<span class="text-required">(*)</span></td>
+                        <td class="text-center">@Html.RadioButtonFor(m => m.DauHieu.DauHong, true)</td>
+                        <td class="text-center">@Html.RadioButtonFor(m => m.DauHieu.DauHong, false)</td>
+                    <tr>
+                </tbody>
+            </table>
+
+            <table class="table table-bordered" style="width:50%">
+                <thead>
+                    <tr>
+                        <th>Triệu chứng</th>
+                        <th width="70" class="text-center">Có</th>
+                        <th width="70" class="text-center">Không</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Nôn/buồn nôn <span class="text-required">(*)</span></td>
+                        <td class="text-center">@Html.RadioButtonFor(m => m.DauHieu.BuonNon, true)</td>
+                        <td class="text-center">@Html.RadioButtonFor(m => m.DauHieu.BuonNon, false)</td>
+                    </tr>
+                    <tr>
+                        <td>Tiêu chảy <span class="text-required">(*)</span></td>
+                        <td class="text-center">@Html.RadioButtonFor(m => m.DauHieu.TieuChay, true)</td>
+                        <td class="text-center">@Html.RadioButtonFor(m => m.DauHieu.TieuChay, false)</td>
+                    </tr>
+                    <tr>
+                        <td>Xuất huyết ngoài da<span class="text-required">(*)</span></td>
+                        <td class="text-center">@Html.RadioButtonFor(m => m.DauHieu.XuatHuyetNgoaiDa, true)</td>
+                        <td class="text-center">@Html.RadioButtonFor(m => m.DauHieu.XuatHuyetNgoaiDa, false)</td>
+                    </tr>
+                    <tr>
+                        <td>Nổi ban ngoài da <span class="text-required">(*)</span></td>
+                        <td class="text-center">@Html.RadioButtonFor(m => m.DauHieu.NoiBanNgoaiDa, true)</td>
+                        <td class="text-center">@Html.RadioButtonFor(m => m.DauHieu.NoiBanNgoaiDa, false)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="form-group">
+            <label>Danh sách vắc-xin hoặc sinh phẩm được sử dụng (*)</label>
+            <input class="form-control" type="text" asp-for="PhoiNhiem.DanhsachVacxin" />
+        </div>
+
+        <div class="row">
+            <table class="table table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th width="70" class="text-center">Có</th>
+                        <th width="70" class="text-center">Không</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Đến trang trại chăn nuôi / chợ buôn bán động vật sống / cơ sở giết mổ động vật / tiếp xúc động vật <span class="text-required" style="color:red;">(*)</span></td>
+                        <td class="text-center"><input type="Radio" class="style-radio" name="fields[hasFever]" asp-for="PhoiNhiem.TiepXucDongVat" value="@true" data-msg-required="Bạn chưa chọn triệu chứng"></td>
+                        <td class="text-center"><input type="Radio" class="style-radio" name="fields[hasFever]" asp-for="PhoiNhiem.TiepXucDongVat" value="@false"></td>
+                    </tr>
+                    <tr>
+                        <td>Tiếp xúc gần ('2m') với người mắc bệnh viêm đường hô hấp do nCoV<span class="text-required" style="color:red;">(*)</span></td>
+                        <td class="text-center"><input type="Radio" class="style-radio" name="fields[hasCough]" asp-for="PhoiNhiem.TiepXucNguoiNhiemCovic" value="@true" data-msg-required="Bạn chưa chọn triệu chứng"></td>
+                        <td class="text-center"><input type="Radio" class="style-radio" name="fields[hasCough]" asp-for="PhoiNhiem.TiepXucNguoiNhiemCovic" value="@false"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+            <p style="color:red; font-size:18px">
+                Dữ liệu bạn cung cấp hoàn toàn bảo mật và chỉ phục vụ cho việc phòng chống dịch, thuộc quản lý của Ban chỉ đạo quốc gia về Phòng chống dịch Covid-19. Khi bạn nhấn nút "Gửi" là bạn đã hiểu và đồng ý.
+            </p>
+        </div>
+        <div class="btn-submit-box text-center">
+            <button type="submit" class="btn btn-success">
+                Gửi tờ khai
+            </button>
+        </div>
+    </form>
+</body>
+</html>
+
+@section Scripts{
+    <script src="~/js/Create.js" asp-append-version="true"></script>
+}
