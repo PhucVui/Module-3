@@ -36,11 +36,12 @@ namespace ToKhaiYTe.Controllers
                 nguoiKhaiBao.SoHoChieu = toKhaiYTeViewModel.SoHoChieu;
 
                 ThongTinDiChuyen thongTinDiChuyen = new ThongTinDiChuyen();
-                thongTinDiChuyen.DayId = toKhaiYTeViewModel.ThongTinDiChuyen.DayId;
                 thongTinDiChuyen.TauBay = toKhaiYTeViewModel.ThongTinDiChuyen.TauBay;
                 thongTinDiChuyen.TauThuyen = toKhaiYTeViewModel.ThongTinDiChuyen.TauThuyen;
                 thongTinDiChuyen.Oto = toKhaiYTeViewModel.ThongTinDiChuyen.Oto;
                 thongTinDiChuyen.SoHieuPhuongTien = toKhaiYTeViewModel.ThongTinDiChuyen.SoHieuPhuongTien;
+                thongTinDiChuyen.DayId = toKhaiYTeViewModel.ThongTinDiChuyen.DayId;
+                thongTinDiChuyen.SoGhe = toKhaiYTeViewModel.ThongTinDiChuyen.SoGhe;
                 thongTinDiChuyen.MonthId = toKhaiYTeViewModel.ThongTinDiChuyen.MonthId;
                 thongTinDiChuyen.YearId = toKhaiYTeViewModel.ThongTinDiChuyen.YearId;
                 thongTinDiChuyen.Khac = toKhaiYTeViewModel.ThongTinDiChuyen.Khac;
@@ -85,9 +86,48 @@ namespace ToKhaiYTe.Controllers
                 _context.Add(nguoiKhaiBao);
                 await _context.SaveChangesAsync();
             }
-            return View("Index");
+            return RedirectToAction("Index", "ToKhaiYTe");
         }
-       
+
+        public IActionResult Index()
+        {
+            return View(_context.NguoiKhaiBaos.ToList());
+        }
+        public IActionResult XemThongTinDiLai(int id)
+        {
+            var thongtindilai = _context.ThongTinDiChuyens.FirstOrDefault(el => el.Id == id);
+            return View(thongtindilai);
+        }
+        public IActionResult XemThongTinLienLac(int id)
+        {
+            var thongtinlienlac = _context.ThongTinLienLacs.FirstOrDefault(el => el.Id == id);
+            return View(thongtinlienlac);
+
+        }
+        public IActionResult XemDauHieu(int id)
+        {
+            var dauhieu = _context.DauHieus.FirstOrDefault(el => el.Id == id);
+            return View(dauhieu);
+        }
+        public IActionResult XemPhoiNhiem(int id)
+        {
+            var phoinhiem = _context.PhoiNhiems.FirstOrDefault(el => el.id == id);
+            return View(phoinhiem);
+        }
+
+        [Route("/ToKhaiYTe/Delete/{id}")]
+        public IActionResult Delete(int id)
+        {
+            var tokhaiyte = _context.NguoiKhaiBaos.FirstOrDefault(el => el.Id == id);
+
+            var dauhieu = _context.DauHieus.FirstOrDefault(el => el.Id == tokhaiyte.DauHieuId);
+            _context.Remove(dauhieu);
+
+            _context.Remove(tokhaiyte);
+            var result = _context.SaveChanges();
+            return Json(new { result });
+        }
+
         public JsonResult GetDistrictById(int id) =>
              Json(new SelectList(_context.District.Where(x => x.ProvinceId == id).ToList(), "Id", "Name"));
 

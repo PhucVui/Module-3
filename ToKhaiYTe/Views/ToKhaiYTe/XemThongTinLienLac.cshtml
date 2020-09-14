@@ -1,0 +1,53 @@
+﻿@model ThongTinLienLac
+@inject ToKhaiYTeContext context
+
+@{
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>View</title>
+</head>
+<body>
+    <table id="example" class="table table-striped table-bordered" style="width:100%">
+        <thead class="thead-dark" style="text-align:center">
+            <tr>
+                <th>Email</th>
+                <th>Số điện thoại</th>
+                <th>Địa chỉ</th>
+                <th>Phường xã</th>
+                <th>Quận huyện</th>
+                <th>Tỉnh thành</th>
+
+            </tr>
+
+        </thead>
+        <tbody style="text-align:center">
+
+            <tr>
+                <td>@Model.Email</td>
+                <td>@Model.PhoneNum</td>
+                <td>@Model.HouseNum</td>
+                <td>
+                    @context.Ward.FirstOrDefault(el => el.Id == Model.WardId).Prefix
+                    @context.Ward.FirstOrDefault(el => el.Id == Model.WardId).Name
+                </td>
+                <td>
+                    @context.District.FirstOrDefault(el => el.Id == Model.DistrictId).Prefix
+                    @context.District.FirstOrDefault(el => el.Id == Model.DistrictId).Name
+                </td>
+                <td>               
+                    @context.Province.FirstOrDefault(el => el.Id == Model.ProvinceId).Name
+                </td>
+
+            </tr>
+
+        </tbody>
+    </table>
+    <a type="submit" asp-controller="ToKhaiYTe" asp-action="Index" class="btn btn-danger">Back</a>
+   
+</body>
+</html>
+

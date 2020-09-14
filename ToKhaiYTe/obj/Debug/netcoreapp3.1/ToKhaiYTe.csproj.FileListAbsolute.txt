@@ -74,7 +74,11 @@ C:\Module3\MVC\ToKhaiYTe\ToKhaiYTe\obj\Debug\netcoreapp3.1\ToKhaiYTe.pdb
 C:\Module3\MVC\ToKhaiYTe\ToKhaiYTe\obj\Debug\netcoreapp3.1\ToKhaiYTe.genruntimeconfig.cache
 C:\Module3\MVC\ToKhaiYTe\ToKhaiYTe\obj\Debug\netcoreapp3.1\ToKhaiYTe.csproj.CoreCompileInputs.cache
 C:\Module3\MVC\ToKhaiYTe\ToKhaiYTe\obj\Debug\netcoreapp3.1\ToKhaiYTe.MvcApplicationPartsAssemblyInfo.cache
-C:\Module3\MVC\ToKhaiYTe\ToKhaiYTe\obj\Debug\netcoreapp3.1\Razor\Views\NguoiKhaiBao.cshtml.g.cs
 C:\Module3\MVC\ToKhaiYTe\ToKhaiYTe\obj\Debug\netcoreapp3.1\Razor\Views\ToKhaiYTe\Register.cshtml.g.cs
 C:\Module3\MVC\ToKhaiYTe\ToKhaiYTe\obj\Debug\netcoreapp3.1\Razor\Views\ToKhaiYTe\Index.cshtml.g.cs
-C:\Module3\MVC\ToKhaiYTe\ToKhaiYTe\obj\Debug\netcoreapp3.1\ToKhaiYTe.csprojAssemblyReference.cache
+C:\Module3\MVC\ToKhaiYTe\ToKhaiYTe\obj\Debug\netcoreapp3.1\Razor\Views\ToKhaiYTe\XemThongTinDiLai.cshtml.g.cs
+C:\Module3\MVC\ToKhaiYTe\ToKhaiYTe\obj\Debug\netcoreapp3.1\Razor\Views\ToKhaiYTe\XemThongTinLienLac.cshtml.g.cs
+C:\Module3\MVC\ToKhaiYTe\ToKhaiYTe\obj\Debug\netcoreapp3.1\Razor\Views\ToKhaiYTe\Demo.cshtml.g.cs
+C:\Module3\MVC\ToKhaiYTe\ToKhaiYTe\obj\Debug\netcoreapp3.1\Razor\Views\ToKhaiYTe\XemDauHieu.cshtml.g.cs
+C:\Module3\MVC\ToKhaiYTe\ToKhaiYTe\obj\Debug\netcoreapp3.1\Razor\Views\ToKhaiYTe\XemPhoiNhiem.cshtml.g.cs
+C:\Module3\MVC\ToKhaiYTe\ToKhaiYTe\bin\Debug\netcoreapp3.1\libman.json

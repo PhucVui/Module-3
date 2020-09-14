@@ -22,12 +22,7 @@ namespace ToKhaiYTe.Models
         public int DiaDiemKhoiHanhId { get; set; }      
         public int DiaDiemNoiDenId { get; set; }      
         public string TrongVong21Ngay { get; set; }
-        // luc truoc co bang date
-        // bi loi~ nen xoa bang date, va cung doi truong dateid thanh 3 truong kia
-        // nhung no van bao loi dateid uk date xoa roi phai ko anh???? alo nghe ne
-        //h anh muon lam dieu gi?
-        // lam cach nao de add vo db nhi :)) dateid cho mo he? xoa bang date roi
-        // class co 3 truong nay, ma ben sql chua co
+        
 
     }
 }
